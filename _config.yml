@@ -1,7 +1,7 @@
 title: "Мои статьи"
 description: "Заметки о веб-разработке"
 remote_theme: stiermid/monoholic@v1.4.0
-url: " https://ziggil.github.io/my_blog_v2/"
+url: "https://ziggil.github.io/my_blog_v2/"
 baseurl: "/my_blog_v2"
 plugins:
   - jekyll-remote-theme
