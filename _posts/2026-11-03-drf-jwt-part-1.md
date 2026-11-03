@@ -455,18 +455,19 @@ $.ajax({
 **Что было.** Открываю `/home/`. В консоли `Uncaught ReferenceError: $ is not defined`. Вся логика `auth.js` и `quiz.js` падает.
 
 **Причина.** В `base.html` я подключил скрипты так:
-
+{% raw %}
 ```html
 <script src="{% static 'deps/js/auth.js' %}"></script>
 <script src="{% static 'deps/js/quiz.js' %}"></script>
 ...
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 ```
+{% endraw %}
 
 jQuery — в самом низу. А `auth.js` использует `$.ajax`. Браузер исполняет скрипты сверху вниз. `$` ещё не существует.
 
 **Решение.** jQuery — первым. До всех наших скриптов:
-
+{% raw %}
 ```html
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -475,7 +476,7 @@ jQuery — в самом низу. А `auth.js` использует `$.ajax`. �
 <script src="{% static 'deps/js/main_quiz.js' %}"></script>
 <script src="{% static 'deps/js/quiz.js' %}"></script>
 ```
-
+{% endraw %}
 ### 2. Гонка событий `jwt_ready`
 
 **Что было.** `quiz.js` вешал слушателя на `jwt_ready`. Но событие улетало раньше, чем слушатель подписывался. Результаты не грузились.
